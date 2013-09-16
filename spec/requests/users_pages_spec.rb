@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-signup_path = "/users/new"
-
 describe "UsersPages" do
   describe "Sign Up" do
     it "allows the user to fill in name and password" do
