@@ -1,9 +1,9 @@
-<% provide(:title, 'Sign up!') %>
+<% provide(:title, 'Update user') %>
 <header>
-  <h2>Sign Up!</h2>
+  <h2>Edit user <%= @user[:username] %></h2>
 </header>
 <% if @user.errors.any? %>
-  <ul class="list errors">
+  <ul class="errors list">
     <% @user.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
@@ -18,5 +18,5 @@
     <%= f.password_field :password %>
     <%= f.label :password_confirmation , "Enter confirmation again" %>
     <%= f.password_field :password_confirmation %>
-    <%= f.submit "Create new account" %>
+    <%= f.submit "Update account" %>
 <% end %>

@@ -132,6 +132,28 @@ form {
 		border-radius: 6px;
 	}
 
+.btn {
+  	background: #ccc;
+		color: white;
+		border: none;
+		cursor: pointer;
+		width: auto;
+		height: 40px;
+    line-height: 40px;
+		margin: auto;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;
+    text-decoration: none;
+    padding: 0 10px;
+    display: inline-block;
+}
+  .btn.btn-green {
+    background: #19CF50;
+  }
+  .btn.btn-red {
+    background: #D01D1A;
+  }
+
 iframe {
 	position: relative;
 	top: 7px;
@@ -147,14 +169,21 @@ section {
 		text-decoration: underline;
 	}
 	section header {
+    padding: 4px 0;
 		border-bottom: 1px solid #D01D1A;
 		margin-bottom: 20px;
+    position: relative;
 	}
 	   section header h2 {
 	       font-size: 32px;
 	       font-family: 'FranchiseRegular';
 	       font-weight: normal;
-	   }
+	   } 
+      section header .btn {
+        position: absolute;
+        top: 2px;
+        right: 0;
+      }
 	section p {
 		margin: 15px 0;
 	}
@@ -169,10 +198,16 @@ section {
 		margin-left: 20px;
 		list-style: none;
 	}
+    section ul.errors li {
+      color: #D01D1A;
+    }  
+  section ul.list {
+    margin-bottom: 20px;
+  }
 	section ul.list li {
 		margin-left: 40px;
 		list-style: none;
-		margin-bottom: 20px;
+		margin-bottom: 10px;
 		list-style: disc;
 	}
 

@@ -1,0 +1,11 @@
+<% provide(:title, @user.username) %>
+<% if @user then %>
+  <header>
+    <h2><%= @user.username %></h2>
+    <%= link_to "Back to all users", users_path, :class => "btn btn-green" %>
+  </header>
+  <p>Email: <%= @user.email %></p>
+  <%= link_to "Delete User", @user, :class => "btn btn-red", method: :delete, data: { confirm: 'Are you sure?', disable_with: 'loading...' }%>
+<% else %>
+  <h2>User not found</h2>
+<% end %>
