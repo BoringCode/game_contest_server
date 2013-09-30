@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "UsersPages" do
   describe "Sign Up" do
-    let(:submit) { 'Create new account' }
+      let(:submit) { 'Create User' }
 
     before { visit signup_path }
 
@@ -65,7 +65,7 @@ it { should have_selector('li', text: user.username) }
 
     let (:user) { FactoryGirl.create(:user) }
     let!(:orig_username) { user.username }
-    let (:submit) { 'Update account' }
+    let (:submit) { 'Update User' }
 
     before { visit edit_user_path(user) }
 

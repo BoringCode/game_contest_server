@@ -1,0 +1,18 @@
+<%= form_for @user do |f| %>
+    <% if @user.errors.any? %>
+      <ul class="errors list">
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= f.label :username , "Enter a username" %>
+    <%= f.text_field :username %>
+    <%= f.label :email , "Enter an email" %>
+    <%= f.text_field :email %>
+    <%= f.label :password , "Enter a password" %>
+    <%= f.password_field :password %>
+    <%= f.label :password_confirmation , "Enter confirmation again" %>
+    <%= f.password_field :password_confirmation %>
+    <%= f.submit %>
+<% end %>
