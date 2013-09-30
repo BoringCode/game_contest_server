@@ -1,14 +1,14 @@
 <% provide(:title, 'Users') %>
-<% if User.all.empty? %>
+<% if @users.empty? %>
 <header>
-  <h2>No Users (<%= pluralize(User.count, "users") %>)</h2>
+  <h2>No Users</h2>
 </header>
 <% else %>
   <header>
     <h2>List of users (<%= pluralize(User.count, "users") %>):</h2>
   </header>
   <ul class="list">
-  <% User.all.each do |u| %>
+  <% @users.each do |u| %>
     <li>
       <%= link_to u.username, u %>
     </li>
