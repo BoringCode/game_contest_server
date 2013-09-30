@@ -112,9 +112,9 @@ form {
 		padding: 8px;
 		display: block;
 		margin-bottom: 20px;
-    background: #bbb;
-    border: none;
-    color: white;
+        background: #bbb;
+        border: none;
+        color: black;
 	}
 		form input[type="radio"], form input[type="checkbox"] {
 			display: inline-block;
