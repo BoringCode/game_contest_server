@@ -1,5 +1,6 @@
 <% provide(:title, 'Update user') %>
 <header>
   <h2>Edit <%= @user[:username] %></h2>
+  <%= link_to "Back to user", @user, class: "btn btn-green" %>
 </header>
 <%= render 'user_form' %>
