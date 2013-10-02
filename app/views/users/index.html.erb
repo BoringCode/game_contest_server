@@ -2,10 +2,12 @@
 <% if @users.empty? %>
     <header>
       <h2>No Users</h2>
+      <%= link_to "Create a new user", signup_path, class: "btn btn-green" %>
     </header>
 <% else %>
   <header>
     <h2>List of users (<%= pluralize(User.count, "users") %>):</h2>
+    <%= link_to "Create a new user", signup_path, class: "btn btn-green" %>
   </header>
   <ul class="list">
   <% @users.each do |u| %>
@@ -15,4 +17,3 @@
   <% end %>
   </ul>
 <% end %>
-<%= link_to "Create a new user", signup_path, class: "btn btn-green" %>
