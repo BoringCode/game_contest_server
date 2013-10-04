@@ -99,8 +99,4 @@ describe User do
       specify { expect(authenticated_user).to be_false }
     end
   end
-<<<<<<< HEAD
 end
-=======
-end
->>>>>>> bd5b9b574d2c967426d3b273e6122c673a63e46f
