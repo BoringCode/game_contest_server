@@ -6,7 +6,7 @@
     </header>
     <p>Email: <a href="mailto:<%= @user.email %>" target="_blank"><%= @user.email %></a></p>
     <%= link_to "Edit user", edit_user_path, class: "btn btn-green" %>
-    <%= link_to "Delete User", @user, class: "btn btn-red", method: :delete, data: { confirm: "Are you sure you want to delete #{@user.username}?", disable_with: 'Deleting...' }%>
+    <%= link_to "Delete user", user_path(@user), class: "btn btn-red", method: :delete, data: { confirm: "Are you sure you want to delete #{@user.username}?", disable_with: 'Deleting...' }%>
 <% else %>
     <header>
         <h2>User not found</h2>

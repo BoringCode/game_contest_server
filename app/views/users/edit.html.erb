@@ -3,4 +3,7 @@
   <h2>Edit <%= @user[:username] %></h2>
   <%= link_to "Back to user", @user, class: "btn btn-green" %>
 </header>
-<%= render 'user_form' %>
+<%= form_for @user, :action => "update", :method => :patch do |f| %>
+  <%= render 'user_form', f:f %>
+  <%= f.submit "Update account" %>
+<% end %>

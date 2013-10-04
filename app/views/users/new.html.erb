@@ -3,4 +3,7 @@
   <h2>Sign Up!</h2>
   <%= link_to "Back to all users", users_path, class: "btn btn-green" %>
 </header>
-<%= render 'user_form' %>
+<%= form_for @user, :action => "create", :method => :post do |f| %>
+  <%= render 'user_form', f:f %>
+  <%= f.submit "Create new account" %>
+<% end %>
