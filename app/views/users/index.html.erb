@@ -13,8 +13,7 @@
   <% @users.each do |u| %>
     <li>
       <%= link_to u.username, u %>
-       <%= link_to "delete", u, class: "btn btn-red", method: :delete, data: { confirm: "Are you sure you want to delete #{u.username}?", disable_with: 'Deleting...' }%>
-
+       <%= link_to "delete", u, class: "red", method: :delete, data: { confirm: "Are you sure you want to delete #{u.username}?", disable_with: 'Deleting...' }%>
     </li>
   <% end %>
   </ul>

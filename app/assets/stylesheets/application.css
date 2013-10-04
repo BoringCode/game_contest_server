@@ -160,6 +160,13 @@ form {
     background: #D01D1A;
   }
 
+.red {
+  color: #D01D1A;
+}
+.green {
+  color: #19CF50;
+}
+
 iframe {
 	position: relative;
 	top: 7px;
