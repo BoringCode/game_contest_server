@@ -52,17 +52,10 @@ GEM
     diff-lcs (1.2.4)
     erubis (2.7.0)
     execjs (2.0.1)
-<<<<<<< HEAD
-    factory_girl (4.2.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.2.1)
-      factory_girl (~> 4.2.0)
-=======
     factory_girl (4.1.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.1.0)
       factory_girl (~> 4.1.0)
->>>>>>> 7b559154d341bcd3e162e0ebcf04258ee1d46398
       railties (>= 3.0.0)
     hike (1.2.3)
     i18n (0.6.5)
@@ -152,10 +145,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
-<<<<<<< HEAD
-=======
   bootstrap-sass!
->>>>>>> 7b559154d341bcd3e162e0ebcf04258ee1d46398
   capybara
   coffee-rails (~> 4.0.0)
   factory_girl_rails
