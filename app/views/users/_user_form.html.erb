@@ -1,15 +1,24 @@
 <% if @user.errors.any? %>
-<ul class="errors list">
+<p class="alert alert-danger">There are <%= @user.errors.count %> errors.</p>
+<ul>
   <% @user.errors.full_messages.each do |msg| %>
-  <li><%= msg %></li>
+  <li class='text-danger'><%= msg %></li>
   <% end %>
 </ul>
 <% end %>
-<%= f.label :username , "Enter a Username" %>
-<%= f.text_field :username %>
-<%= f.label :email , "Enter an Email" %>
-<%= f.text_field :email %>
-<%= f.label :password , "Enter a Password" %>
-<%= f.password_field :password %>
-<%= f.label :password_confirmation , "Enter Confirmation" %>
-<%= f.password_field :password_confirmation %>
+<div class="form-group">
+  <%= f.label :username , "Enter a Username" %>
+  <%= f.text_field :username, class: "form-control" %>
+</div>
+<div class="form-group">
+  <%= f.label :email , "Enter an Email" %>
+  <%= f.text_field :email, class: "form-control" %>
+</div>
+<div class="form-group">
+  <%= f.label :password , "Enter a Password" %>
+  <%= f.password_field :password, class: "form-control" %>
+</div>
+<div class="form-group">
+  <%= f.label :password_confirmation , "Enter Confirmation" %>
+  <%= f.password_field :password_confirmation, class: "form-control" %>
+</div>

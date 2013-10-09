@@ -1,19 +1,19 @@
 <% provide(:title, 'Users') %>
 <% if @users.empty? %>
-    <header>
+    <header class="page-header">
       <h2>No Users</h2>
-      <%= link_to "Create a new user", signup_path, class: "btn btn-green" %>
+      <%= link_to "Create a new user", signup_path, class: "btn btn-success" %>
     </header>
 <% else %>
-  <header>
+  <header class="page-header">
     <h2>List of users (<%= pluralize(User.count, "users") %>):</h2>
-    <%= link_to "Create a new user", signup_path, class: "btn btn-green" %>
+    <%= link_to "Create a new user", signup_path, class: "btn btn-success" %>
   </header>
-  <ul class="list">
+  <ul class="list-group">
   <% @users.each do |u| %>
-    <li>
-      <%= link_to u.username, u %>
-       <%= link_to "delete", u, class: "red", method: :delete, data: { confirm: "Are you sure you want to delete #{u.username}?", disable_with: 'Deleting...' }%>
+    <li class="list-group-item">
+      <%= link_to u.username, u %> |
+       <%= link_to "delete", u, class: "text-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{u.username}?", disable_with: 'Deleting...' }%>
     </li>
   <% end %>
   </ul>
