@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>Game Contest Server</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+		<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 		<%= csrf_meta_tags %>
 	</head>
@@ -18,12 +18,16 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Game Contest Server</a>
+            <%= link_to('Game Contest Server', root_path, class: "navbar-brand") %>
           </div>
          <div class="collapse navbar-collapse navbar-ex1-collapse">
            <ul class="nav navbar-nav">
-             <li><a href="<%= users_path %>">Users</a></li>
-             <li><a href="<%= signup_path %>">Sign Up</a></li>
+             <li <%= if (current_page?(users_path) || current_page?(root_path)) then 'class=active' end %>>
+               <%= link_to('Users', users_path) %>
+             </li>
+             <li <%= if (current_page?(signup_path)) then 'class=active' end %>>
+               <%= link_to('Sign Up', signup_path) %>
+             </li>
            </ul>
            <ul class="nav navbar-nav navbar-right">
              <li><a href="http://bradleyrosenfeld.com" target="_blank">Bradley Rosenfeld</a></li>
