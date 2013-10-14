@@ -1,15 +1,12 @@
 <% if @user then %>
-<% provide(:title, @user.username) %>
+    <% content_for :title, @user[:username] %>
     <header class="page-header">
-        <h2><%= @user.username %></h2>
-        <%= link_to "Back to all users", users_path, class: "btn btn-success" %>
+      <h2><%=h yield(:title)%></h2>
     </header>
     <p>Email: <a href="mailto:<%= @user.email %>" target="_blank"><%= @user.email %></a></p>
     <%= link_to "Edit user", edit_user_path, class: "btn btn-success" %>
     <%= link_to "Delete user", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{@user.username}?", disable_with: 'Deleting...' }%>
 <% else %>
-    <header class="page-header">
-        <h2>User not found</h2>
-        <%= link_to "Back to all users", users_path, :class => "btn btn-success" %>
-    </header>
+  <% content_for :title, "User not found" %>
+  <%= render 'no_user' %>
 <% end %>

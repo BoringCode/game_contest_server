@@ -1,8 +1,8 @@
+<% content_for :title, "Login" %>
 <header class="page-header">
-  <h2>Login</h2>
+  <h2><%=h yield(:title)%></h2>
 </header>
-
-<%= form_tag sessions_path do %>
+<%= form_tag login_path do %>
     <div class="form-group">
         <%= label_tag :username %>
         <%= text_field_tag :username, params[:username], class: 'form-control' %>

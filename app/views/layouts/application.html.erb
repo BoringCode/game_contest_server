@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Game Contest Server</title>
+		<title><%=h yield(:title) %> - Game Contest Server</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
@@ -28,7 +28,7 @@
              <li <%= if (current_page?(signup_path)) then 'class=active' end %>>
                <%= link_to('Sign Up', signup_path) %>
              </li>
-             <li <%= if (current_page?(login_path)) then 'class=active' end %>>
+             <li <%= if (current_page?(login_path) || current_page?(login_create_path)) then 'class=active' end %>>
                <%= link_to('Login', login_path) %>
              </li>
            </ul>

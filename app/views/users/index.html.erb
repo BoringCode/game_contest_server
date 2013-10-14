@@ -1,12 +1,11 @@
+<% content_for :title, "Users" %>
 <% if @users.empty? %>
     <header class="page-header">
       <h2>No Users</h2>
-      <%= link_to "Create a new user", signup_path, class: "btn btn-success" %>
     </header>
 <% else %>
   <header class="page-header">
     <h2>List of users (<%= pluralize(User.count, "users") %>):</h2>
-    <%= link_to "Create a new user", signup_path, class: "btn btn-success" %>
   </header>
   <ul class="list-group">
   <% @users.each do |u| %>
@@ -16,4 +15,5 @@
     </li>
   <% end %>
   </ul>
+  <%= link_to "Create a new user", signup_path, class: "btn btn-success" %>
 <% end %>

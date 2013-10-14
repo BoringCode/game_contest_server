@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   end
     
   def show
-    @user = User.find(params[:id])
+    if (User.exists?(params[:id]))
+      @user = User.find(params[:id])
+    end
   end
   
   def new
@@ -22,7 +24,9 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
+    if (User.exists?(params[:id]) && session[:user_id].to_s == params[:id].to_s)
+      @user = User.find(params[:id])
+    end
   end
   
   def update

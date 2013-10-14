@@ -1,8 +1,13 @@
-<header class="page-header">
-  <h2>Edit <%= @user[:username] %></h2>
-  <%= link_to "Back to user", @user, class: "btn btn-success" %>
-</header>
-<%= form_for @user, :action => "update", :method => :patch do |f| %>
-  <%= render 'user_form', f:f %>
-  <%= f.submit "Update account", class: "btn btn-success" %>
+<% if (@user) %>
+  <% content_for :title, "Edit #{@user[:username]}" %>
+  <header class="page-header">
+    <h2>Edit <%= @user[:username] %></h2>
+  </header>
+  <%= form_for @user, :action => "update", :method => :patch do |f| %>
+    <%= render 'user_form', f:f %>
+    <%= f.submit "Update account", class: "btn btn-success" %>
+  <% end %>
+<% else %>
+  <% content_for :title, "User not found" %>
+  <%= render 'no_user' %>
 <% end %>

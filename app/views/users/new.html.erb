@@ -1,6 +1,6 @@
+<% content_for :title, "Sign up!" %>
 <header class="page-header">
-  <h2>Sign Up!</h2>
-  <%= link_to "Back to all users", users_path, class: "btn btn-success" %>
+  <h2><%=h yield(:title)%></h2>
 </header>
 <%= form_for @user, :action => "create", :method => :post do |f| %>
   <%= render 'user_form', f:f %>
