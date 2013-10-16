@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-    def new
-        
+    def new        
     end
     
     def create
@@ -16,6 +15,8 @@ class SessionsController < ApplicationController
     end
     
     def destroy
-        
+      cookies.signed[:user_id] = nil
+      flash[:success] = "Logged out"
+      redirect_to login_path
     end
 end
