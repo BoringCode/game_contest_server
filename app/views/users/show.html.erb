@@ -4,8 +4,8 @@
       <h2><%=h yield(:title)%></h2>
     </header>
     <p>Email: <a href="mailto:<%= @user.email %>" target="_blank"><%= @user.email %></a></p>
-    <%= link_to "Edit user", edit_user_path, class: "btn btn-success" %>
-    <%= link_to "Delete user", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{@user.username}?", disable_with: 'Deleting...' }%>
+    <% if (logged_in? && current_user?(@user)) %><%= link_to "Edit user", edit_user_path, class: "btn btn-success" %><% end %>
+    <% if (logged_in? && current_user.admin? && !@user.admin?) %><%= link_to "Delete user", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{@user.username}?", disable_with: 'Deleting...' } %><% end %>
 <% else %>
   <% content_for :title, "User not found" %>
   <%= render 'no_user' %>

@@ -15,17 +15,28 @@ class UsersController < ApplicationController
   end
   
   def new
-    @user = User.new
+    if (logged_in? && !current_user.admin?) 
+      flash[:warning] = "You can't create a new user when you are logged in"
+      redirect_to root_path
+    else
+      @user = User.new
+    end
   end
   
   def create
-    @user = User.new(permitted_params)
-    if @user.save
-      cookies.signed[:user_id] = @user.id
-      flash[:success] = "Welcome to the site: #{@user.username}"
-      redirect_to @user
+    if (logged_in? && !current_user.admin?)
+      flash[:warning] = "You can't create an user when you are logged out"
+      redirect_to root_path
     else
-      render :new
+      @user = User.new(permitted_params)
+      if @user.save
+        cookies.signed[:user_id] = @user.id
+        flash[:success] = "Welcome to the site: #{@user.username}"
+        redirect_to @user
+      else
+        flash.now[:danger] = "Unable to create new user"
+        render :new
+      end
     end
   end
   
@@ -39,8 +50,10 @@ class UsersController < ApplicationController
     if (User.exists?(params[:id]))
       @user = User.find(params[:id])
       if @user.update(permitted_params)
+        flash[:success] = "Updated: #{@user.username}"
         redirect_to @user
       else
+        flash.now[:danger] = "Unable to update #{@user.username}"
         render :edit
       end
     end
@@ -49,39 +62,43 @@ class UsersController < ApplicationController
   def destroy
     if (User.exists?(params[:id]))
       @user = User.find(params[:id])
-      flash[:success] = "Deleted: #{@user.username}"
-      @user.destroy
-      redirect_to users_path
-    end
-  end
-  
-  private
-  
-  def permitted_params
-    params.require(:user).permit(:username, :password, :password_confirmation, :email)
-  end
-  
-  def ensure_user_logged_in
-    if (!logged_in?)
-      flash[:danger] = "Unable"
-      redirect_to login_path
-    end
-  end
-  
-  def ensure_correct_user
-    if (User.exists?(params[:id]))
-      @user = User.find(params[:id])
-      if (!current_user?(@user))
-        flash[:danger] = "Unable"
+      if (@user.admin?)
+        flash[:danger] = "You can't delete an admin user"
         redirect_to root_path
+      else
+        flash[:success] = "Deleted: #{@user.username}"
+        @user.destroy
+        redirect_to users_path
       end
     end
   end
   
-  def ensure_admin_user
-    if (!current_user.admin?)
-      flash[:danger] = "Unable"
-      redirect_to users_path
+  private  
+    def permitted_params
+      params.require(:user).permit(:username, :password, :password_confirmation, :email)
     end
-  end
+    
+    def ensure_user_logged_in
+      if (!logged_in?)
+        flash[:warning] = "Unable"
+        redirect_to login_path
+      end
+    end
+    
+    def ensure_correct_user
+      if (User.exists?(params[:id]))
+        @user = User.find(params[:id])
+        if (!current_user?(@user))
+          flash[:danger] = "Unable"
+          redirect_to root_path
+        end
+      end
+    end
+    
+    def ensure_admin_user
+      if (!current_user.admin?)
+        flash[:danger] = "Unable"
+        redirect_to users_path
+      end
+    end
 end

@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     
     def destroy
       cookies.signed[:user_id] = nil
-      flash[:success] = "Logged out"
+      flash[:info] = "Logged out"
       redirect_to login_path
     end
 end
