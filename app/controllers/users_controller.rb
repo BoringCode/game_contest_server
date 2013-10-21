@@ -1,5 +1,6 @@
 class UsersController < ApplicationController 
   #Restrict access to some methods
+  before_action :ensure_user_logged_out, only: [:new, :create]
   before_action :ensure_user_logged_in, only: [:edit, :update]
   before_action :ensure_correct_user, only: [:edit, :update]
   before_action :ensure_admin_user, only: [:destroy]
@@ -15,29 +16,19 @@ class UsersController < ApplicationController
   end
   
   def new
-    if (logged_in? && !current_user.admin?) 
-      flash[:warning] = "You can't create a new user when you are logged in"
-      redirect_to root_path
-    else
-      @user = User.new
-    end
+     @user = User.new
   end
   
   def create
-    if (logged_in? && !current_user.admin?)
-      flash[:warning] = "You can't create an user when you are logged out"
-      redirect_to root_path
-    else
-      @user = User.new(permitted_params)
-      if @user.save
+     @user = User.new(permitted_params)
+     if @user.save
         cookies.signed[:user_id] = @user.id
         flash[:success] = "Welcome to the site: #{@user.username}"
         redirect_to @user
-      else
+     else
         flash.now[:danger] = "Unable to create new user"
         render :new
-      end
-    end
+     end
   end
   
   def edit
@@ -77,6 +68,13 @@ class UsersController < ApplicationController
     def permitted_params
       params.require(:user).permit(:username, :password, :password_confirmation, :email)
     end
+   
+   def ensure_user_logged_out
+      if (logged_in?)
+         flash[:warning] = "Unable"
+         redirect_to root_path
+      end
+   end
     
     def ensure_user_logged_in
       if (!logged_in?)
