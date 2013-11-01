@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030135323) do
+ActiveRecord::Schema.define(version: 20131101130402) do
 
   create_table "contests", force: true do |t|
     t.datetime "deadline"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20131030135323) do
   end
 
   add_index "matches", ["manager_id", "manager_type"], name: "index_matches_on_manager_id_and_manager_type"
+
+  create_table "player_matches", force: true do |t|
+    t.float    "score"
+    t.string   "result"
+    t.integer  "player_id"
+    t.integer  "match_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "players", force: true do |t|
     t.string   "file_location"
