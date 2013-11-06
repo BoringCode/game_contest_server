@@ -1,8 +1,8 @@
 <% content_for :title, "Sign up!" %>
 <header class="page-header">
-  <h2><%=h yield(:title)%></h2>
+   <h2><%=h yield(:title)%></h2>
 </header>
 <%= form_for @user, :action => "create", :method => :post do |f| %>
-  <%= render 'user_form', f:f %>
+   <%= render 'user_form', f:f %>
    <%= f.submit "Create new account", class: "btn btn-success" %>
 <% end %>
