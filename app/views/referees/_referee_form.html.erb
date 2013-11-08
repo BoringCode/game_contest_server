@@ -1,24 +1,24 @@
 <% if @referee.errors.any? %>
 <p class="alert alert-danger">There are <%= @user.errors.count %> errors.</p>
 <ul>
-  <% @referee.errors.full_messages.each do |msg| %>
-  <li class='text-danger'><%= msg %></li>
-  <% end %>
+   <% @referee.errors.full_messages.each do |msg| %>
+   <li class='text-danger'><%= msg %></li>
+   <% end %>
 </ul>
 <% end %>
 <div class="form-group">
-  <%= f.label :name, "Referee Name" %>
-  <%= f.text_field :name, class: "form-control" %>
+   <%= f.label :name, "Referee Name" %>
+   <%= f.text_field :name, class: "form-control" %>
 </div>
 <div class="form-group">
-  <%= f.label :rules_url, "Rules URL" %>
-  <%= f.text_field :rules_url, class: "form-control" %>
+   <%= f.label :rules_url, "Rules URL" %>
+   <%= f.text_field :rules_url, class: "form-control" %>
 </div>
 <div class="form-group">
-  <%= f.label :players_per_game, "Players per Game" %>
-  <%= f.text_field :players_per_game, class: "form-control" %>
+   <%= f.label :players_per_game, "Players per Game" %>
+   <%= f.select :players_per_game, 1..10, {}, class: "form-control" %>
 </div>
 <div class="form-group">
-  <%= f.label :upload, "Referee File" %>
-  <%= f.file_field :upload, class: "form-control" %>
+   <%= f.label :upload, "Referee File" %>
+   <%= f.file_field :upload, class: "form-control" %>
 </div>

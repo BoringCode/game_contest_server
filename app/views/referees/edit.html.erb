@@ -1,0 +1,13 @@
+<% if (@referee) %>
+   <% content_for :title, "Edit Referee: " + @referee.name %>
+  <header class="page-header">
+    <h2><%=h yield(:title)%></h2>
+  </header>
+   <%= form_for @referee, :action => "create", :method => :post do |f| %>
+      <%= render 'referee_form', f:f %>
+      <%= f.submit "Update Referee", class: "btn btn-success" %>
+   <% end %>
+<% else %>
+  <% content_for :title, "Referee not found" %>
+  <%= render 'no_referee' %>
+<% end %>

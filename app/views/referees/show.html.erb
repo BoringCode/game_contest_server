@@ -1,0 +1,14 @@
+<% if @referee then %>
+   <% content_for :title, "Referee - " + @referee[:name] %>
+   <header class="page-header">
+      <h2><%=h yield(:title)%></h2>
+   </header>
+   <p>Creator: <%= link_to @referee.user.username, user_path(@referee.user) %></p>
+   <p>Rules: <%= link_to @referee.rules_url, @referee.rules_url %></p>
+   <p>Players per Game: <%= @referee.players_per_game %></p>
+   <% if (logged_in? && current_user?(@referee.user)) %><%= link_to "Edit referee", edit_referee_path, class: "btn btn-success" %><% end %>
+   <% if (logged_in? && current_user.admin?) %><%= link_to "Delete referee", referee_path(@referee), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{@referee.name}?", disable_with: 'Deleting...' } %><% end %>
+<% else %>
+   <% content_for :title, "Referee not found" %>
+   <%= render 'no_referee' %>
+<% end %>
