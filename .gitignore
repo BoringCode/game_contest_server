@@ -4,11 +4,21 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Ignore changes to spec_helper.rb since it has extra stuff in there
+# just for JGG, but students shouldn't be required to use it.
+/spec/spec_helper.rb
+
 # Ignore all uploaded data files
+<<<<<<< HEAD
 /code/managers/development/*
 /code/managers/test/*
 /code/managers/production/*
 /code/referees/*
+=======
+/code/referees/development/*
+/code/referees/test/*
+/code/referees/production/*
+>>>>>>> 61dd1beec93745b98f125102070f560b91a0965d
 
 # Ignore bundler config.
 /.bundle
