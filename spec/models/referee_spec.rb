@@ -15,9 +15,6 @@ describe Referee do
   describe "validations" do
     it { should be_valid }
   end
-<<<<<<< HEAD
-end
-=======
 
   describe "empty file location" do
     before { referee.file_location = '' }
@@ -166,4 +163,3 @@ end
     it { should_not be_valid }
   end
 end
->>>>>>> 61dd1beec93745b98f125102070f560b91a0965d

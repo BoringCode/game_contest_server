@@ -1,12 +1,41 @@
 <% if @user then %>
-    <% content_for :title, @user[:username] %>
-    <header class="page-header">
+   <% content_for :title, @user[:username] %>
+   <header class="page-header">
       <h2><%=h yield(:title)%></h2>
-    </header>
-    <p>Email: <a href="mailto:<%= @user.email %>" target="_blank"><%= @user.email %></a></p>
-    <% if (logged_in? && current_user?(@user)) %><%= link_to "Edit user", edit_user_path, class: "btn btn-success" %><% end %>
-    <% if (logged_in? && current_user.admin? && !@user.admin?) %><%= link_to "Delete user", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{@user.username}?", disable_with: 'Deleting...' } %><% end %>
+   </header>
+   <p>Email: <a href="mailto:<%= @user.email %>" target="_blank"><%= @user.email %></a></p>
+   <h2>Players (<%= pluralize(@user.players.count, "player") %>)</h2>
+   <ul class="list-group">
+      <% @user.players.each do |p| %>
+         <li class="list-group-item">
+            <%= link_to p.name, p %>
+            <% if (logged_in? && current_user?(@user)) %>
+            | <%= link_to "delete", p, class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this player?", disable_with: "Deleting..." } %>
+            <% end %>
+         </li>
+      <% end %>
+   </ul>
+   <% if @user.contest_creator then %>
+      <h2>Referees (<%= pluralize(@user.referees.count, "referee") %>)</h2>
+      <ul class="list-group">
+         <% @user.referees.each do |r| %>
+            <li class="list-group-item">
+               <%= link_to r.name, r %>
+               <% if (logged_in? && current_user?(@user)) %>
+               | <%= link_to "delete", r, class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this referee?", disable_with: "Deleting..." } %>
+               <% end %>
+            </li>
+         <% end %>
+      </ul>
+   <% end %>
+   <% if (logged_in? && current_user?(@user)) %>
+      <%= link_to "Edit user", edit_user_path, class: "btn btn-success" %>
+      <% if (current_user.contest_creator) %>
+         <%= link_to "New Referee", new_referee_path, class: "btn btn-success" %>
+      <% end %>
+   <% end %>
+   <% if (logged_in? && current_user.admin? && !@user.admin?) %><%= link_to "Delete user", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{@user.username}?", disable_with: 'Deleting...' } %><% end %>
 <% else %>
-  <% content_for :title, "User not found" %>
-  <%= render 'no_user' %>
+   <% content_for :title, "User not found" %>
+   <%= render 'no_user' %>
 <% end %>

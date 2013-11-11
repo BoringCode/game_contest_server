@@ -3,7 +3,7 @@
   <header class="page-header">
     <h2><%=h yield(:title)%></h2>
   </header>
-   <%= form_for @referee, :action => "create", :method => :post do |f| %>
+   <%= form_for @referee, :action => "update", :method => :patch do |f| %>
       <%= render 'referee_form', f:f %>
       <%= f.submit "Update Referee", class: "btn btn-success" %>
    <% end %>

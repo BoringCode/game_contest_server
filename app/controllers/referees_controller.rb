@@ -11,13 +11,26 @@ class RefereesController < ApplicationController
    end
    
    def create
-      @referee = current_user.referees.build(acceptable_params)
+      @referee = current_user.referees.build(permitted_params)
       if @referee.save
          flash[:success] = "Referee created!"
          redirect_to @referee
       else
          flash.now[:danger] = "Unable to create referee"
          render :new
+      end
+   end
+
+   def update
+      if (Referee.exists?(params[:id]))
+         @referee = Referee.find(params[:id])
+         if @referee.update(permitted_params)
+            flash[:success] = "Updated: #{@referee.name}"
+            redirect_to @referee
+         else
+            flash.now[:danger] = "Unable to update #{@referee.name}"
+            render :edit
+         end
       end
    end
    
@@ -33,8 +46,17 @@ class RefereesController < ApplicationController
       end
    end
    
+   def destroy
+      if (Referee.exists?(params[:id]))
+         @referee = Referee.find(params[:id])
+         flash[:success] = "Deleted: #{@referee.name}"
+         @referee.destroy
+         redirect_to root_path
+      end
+   end
+   
    private
-      def acceptable_params
+      def permitted_params
          params.require(:referee).permit(:name, :rules_url, :players_per_game, :upload)   
       end
    
