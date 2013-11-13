@@ -10,7 +10,7 @@
          <li class="list-group-item">
             <%= link_to p.name, p %>
             <% if (logged_in? && current_user?(@user)) %>
-            | <%= link_to "delete", p, class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this player?", disable_with: "Deleting..." } %>
+            | <%= link_to "delete", p, class: "text-danger", method: :delete, data: { confirm: "Are you sure you want to delete this player?", disable_with: "Deleting..." } %>
             <% end %>
          </li>
       <% end %>
@@ -22,7 +22,7 @@
             <li class="list-group-item">
                <%= link_to r.name, r %>
                <% if (logged_in? && current_user?(@user)) %>
-               | <%= link_to "delete", r, class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete this referee?", disable_with: "Deleting..." } %>
+               | <%= link_to "delete", r, class: "text-danger", method: :delete, data: { confirm: "Are you sure you want to delete this referee?", disable_with: "Deleting..." } %>
                <% end %>
             </li>
          <% end %>
