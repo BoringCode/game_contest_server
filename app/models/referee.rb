@@ -10,10 +10,10 @@ class Referee < ActiveRecord::Base
    
    def upload=(uploaded_file)
       if (uploaded_file.nil?)
-         #no file
+         file_location = nil
       else
-         time_no_spaces = Time.now.to_s.gsub(/\s/, '_')
-         file_location = Rails.root.join('code', 'referees', Rails.env, time_no_spaces).to_s
+         file_name_time_hash = Time.now.to_s.gsub(/\s/, '_') + SecureRandom.hex(4)
+         file_location = Rails.root.join('code', 'referees', Rails.env, file_name_time_hash).to_s
          IO::copy_stream(uploaded_file, file_location)  
       end
       self.file_location = file_location
