@@ -14,8 +14,9 @@
             <% end %>
          </li>
       <% end %>
+       <%= link_to "New Player", new_player_path, class: "btn btn-success" %>
    </ul>
-   <% if @user.contest_creator then %>
+   <% if (@user.contest_creator?) %>
       <h2>Referees (<%= pluralize(@user.referees.count, "referee") %>)</h2>
       <ul class="list-group">
          <% @user.referees.each do |r| %>
@@ -27,15 +28,13 @@
             </li>
          <% end %>
       </ul>
+      <%= link_to "New Referee", new_referee_path, class: "btn btn-success" %>
    <% end %>
    <% if (logged_in? && current_user?(@user)) %>
       <%= link_to "Edit user", edit_user_path, class: "btn btn-success" %>
-      <% if (current_user.contest_creator) %>
-         <%= link_to "New Referee", new_referee_path, class: "btn btn-success" %>
-      <% end %>
    <% end %>
    <% if (logged_in? && current_user.admin? && !@user.admin?) %><%= link_to "Delete user", user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{@user.username}?", disable_with: 'Deleting...' } %><% end %>
 <% else %>
    <% content_for :title, "User not found" %>
-   <%= render 'no_user' %>
+   <%= render 'layouts/no_reference' %>
 <% end %>

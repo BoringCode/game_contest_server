@@ -1,0 +1,13 @@
+<% if (@contest) %>
+   <% content_for :title, "Edit Contest: " + @contest.name %>
+  <header class="page-header">
+    <h2><%=h yield(:title)%></h2>
+  </header>
+   <%= form_for @contest, :action => "update", :method => :patch do |f| %>
+      <%= render 'contest_form', f:f %>
+      <%= f.submit "Update Contest", class: "btn btn-success" %>
+   <% end %>
+<% else %>
+  <% content_for :title, "Contest not found" %>
+   <%= render 'layouts/no_reference' %>
+<% end %>

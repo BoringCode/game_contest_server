@@ -1,0 +1,8 @@
+<% content_for :title, "Create a contest" %>
+<header class="page-header">
+   <h2><%=h yield(:title)%></h2>
+</header>
+<%= form_for @contest, :action => "create", :method => :post do |f| %>
+   <%= render 'contest_form', f:f %>
+   <%= f.submit "Create Contest", class: "btn btn-success" %>
+<% end %>

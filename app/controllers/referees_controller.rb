@@ -1,8 +1,8 @@
 class RefereesController < ApplicationController
    #restrict access
    before_action :ensure_user_logged_in, only: [:new, :create, :edit, :update]
-   before_action :ensure_contest_creator, only: [:new, :create]
-   before_action :ensure_correct_user, only: [:update, :edit]
+   before_action :ensure_contest_creator, only: [:new, :create, :edit, :update]
+   before_action :ensure_correct_user, only: [:update, :edit, :destroy]
    
    def index
       @referees = Referee.all
@@ -70,7 +70,7 @@ class RefereesController < ApplicationController
       end 
       def ensure_contest_creator
          if (!current_user.contest_creator?)
-            flash[:warning] = "Unable"
+            flash[:danger] = "Unable"
             redirect_to root_path
          end
       end  

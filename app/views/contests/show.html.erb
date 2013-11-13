@@ -1,0 +1,17 @@
+<% if @contest then %>
+   <% content_for :title, "Contest - " + @contest.name %>
+   <header class="page-header">
+      <h2><%=h yield(:title)%></h2>
+   </header>
+   <p>Creator: <%= link_to @contest.user.username, user_path(@contest.user) %></p>
+   <p>Contest Type: <%= @contest.contest_type %></p>
+   <p>Start Time: <%=time_ago_in_words(@contest.start)%></p>
+   <p>Deadline: <%= @contest.deadline %></p>
+   <p>Description: <%= @contest.description %></p>
+   <p>Referee: <%= link_to @contest.referee.name, referee_path(@contest.referee) %></p>
+   <% if (logged_in? && current_user?(@contest.user)) %><%= link_to "Edit contest", edit_contest_path, class: "btn btn-success" %><% end %>
+   <% if (logged_in? && current_user.admin?) %><%= link_to "Delete contest", contest_path(@contest), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{@contest.name}?", disable_with: 'Deleting...' } %><% end %>
+<% else %>
+   <% content_for :title, "Referee not found" %>
+   <%= render 'layouts/no_reference' %>
+<% end %>

@@ -1,0 +1,32 @@
+<% if @contest.errors.any? %>
+<p class="alert alert-danger">There are <%= @contest.errors.count %> errors.</p>
+<ul>
+  <% @contest.errors.full_messages.each do |msg| %>
+  <li class="text-danger"><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+<div class="form-group">
+   <%= f.label :name %>
+   <%= f.text_field :name, class: "form-control" %>
+</div>
+<div class="form-group">
+   <%= f.label :deadline %>
+   <%= f.datetime_select :deadline, class: "form-control" %>
+</div>
+<div class="form-group">
+   <%= f.label :start %>
+   <%= f.datetime_select :start, class: "form-control" %>
+</div>
+<div class="form-group">
+   <%= f.label :description %>
+   <%= f.text_area :description, class: "form-control" %>
+</div>
+<div class="form-group">
+   <%= f.label :contest_type, "Contest type" %>
+   <%= f.text_field :contest_type, class: "form-control" %>
+</div>
+<div class="form-group">
+   <%= f.label :referee_id, "Referee" %>
+   <%= f.collection_select(:referee_id, Referee.all, :id, :name) %>
+</div>

@@ -96,7 +96,7 @@ class UsersController < ApplicationController
     def ensure_admin_user
       if (!current_user.admin?)
         flash[:danger] = "Unable"
-        redirect_to users_path
+        redirect_to root_path
       end
     end
 end

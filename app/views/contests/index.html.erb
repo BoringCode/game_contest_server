@@ -1,0 +1,20 @@
+<% content_for :title, "Contests" %>
+<% if @contests.empty? %>
+    <header class="page-header">
+      <h2>No Contests</h2>
+    </header>
+<% else %>
+  <header class="page-header">
+    <h2>List of contests (<%= pluralize(Contest.count, "contests") %>):</h2>
+  </header>
+  <ul class="list-group">
+  <% @contests.each do |c| %>
+    <li class="list-group-item">
+      <%= link_to c.name, c %>
+      <% if (logged_in? && current_user.admin?) %> |
+      <%= link_to "delete", c, class: "text-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{c.name}?", disable_with: 'Deleting...' }%>
+     <% end %>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
