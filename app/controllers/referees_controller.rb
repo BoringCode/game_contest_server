@@ -1,6 +1,6 @@
 class RefereesController < ApplicationController
    #restrict access
-   before_action :ensure_user_logged_in, only: [:new, :create, :edit, :update]
+   before_action :ensure_user_logged_in, only: [:new, :create, :edit, :update, :destroy]
    before_action :ensure_contest_creator, only: [:new, :create, :edit, :update]
    before_action :ensure_correct_user, only: [:update, :edit, :destroy]
    

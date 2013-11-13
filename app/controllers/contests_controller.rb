@@ -1,7 +1,7 @@
 class ContestsController < ApplicationController
-   before_action :ensure_user_logged_in, only: [:new, :create, :edit, :update]
-   #before_action :ensure_contest_creator, only: [:new, :create]
-   before_action :ensure_correct_user, only: [:update, :edit]
+   before_action :ensure_user_logged_in, only: [:new, :create, :edit, :update, :destroy]
+   before_action :ensure_contest_creator, only: [:new, :create, :update, :edit]
+   before_action :ensure_correct_user, only: [:update, :edit, :destroy]
    
    def index
       @contests = Contest.all
@@ -25,7 +25,7 @@ class ContestsController < ApplicationController
    def update
       if (Contest.exists?(params[:id]))
          @contest = Contest.find(params[:id])
-         if @referee.update(permitted_params)
+         if @contest.update(permitted_params)
             flash[:success] = "Updated: #{@contest.name}"
             redirect_to @contest
          else
@@ -69,7 +69,7 @@ class ContestsController < ApplicationController
       def ensure_contest_creator
          if (!current_user.contest_creator?)
             flash[:danger] = "Unable"
-            redirect_to contests_path
+            redirect_to root_path
          end
       end  
       def ensure_correct_user
@@ -77,7 +77,7 @@ class ContestsController < ApplicationController
             @contest = Contest.find(params[:id])
             if (!current_user?(@contest.user))
                flash[:danger] = "Unable"
-               redirect_to contests_path
+               redirect_to root_path
             end
          end
       end
