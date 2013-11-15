@@ -6,9 +6,9 @@ class Contest < ActiveRecord::Base
    validates :referee, presence: true
    validates :user, presence: true
    
-   validates :name, presence: true
+   validates(:name, presence: true, uniqueness: true, length: {maximum: 20})
    validates :contest_type, presence: true
-   validates :start, presence: true
-   validates :deadline, presence: true
-   validates :description, presence: true
+   validates_datetime :start, :before => :deadline, :after => lambda { Date.today }
+   validates_datetime :deadline, :after => :start
+   validates :description, presence: true     
 end
