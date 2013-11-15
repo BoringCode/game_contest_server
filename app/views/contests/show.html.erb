@@ -6,7 +6,7 @@
    <p>Creator: <%= link_to @contest.user.username, user_path(@contest.user) %></p>
    <p>Contest Type: <%= @contest.contest_type %></p>
    <p>Start Time: <%=time_ago_in_words(@contest.start)%></p>
-   <p>Deadline: <%= @contest.deadline %></p>
+   <p>Deadline: <%= distance_of_time_in_words_to_now(@contest.deadline) %></p>
    <p>Description: <%= @contest.description %></p>
    <p>Referee: <%= link_to @contest.referee.name, referee_path(@contest.referee) %></p>
    <% if (logged_in? && current_user?(@contest.user)) %><%= link_to "Edit contest", edit_contest_path, class: "btn btn-success" %><% end %>
