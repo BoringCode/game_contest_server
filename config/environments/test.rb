@@ -13,11 +13,11 @@ GameContestServer::Application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_assets  = true
+  config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
 
   # Raise exceptions instead of rendering exception templates.
@@ -36,4 +36,8 @@ GameContestServer::Application.configure do
 
   # Speed up tests by lowering bcrypt's cost function.
   ActiveModel::SecurePassword.min_cost = true
+
+  # Don't advance time so that it is easier to compare with
+  # Time.current properly
+  Timecop.freeze(Time.utc(2013))
 end
