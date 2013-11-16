@@ -1,5 +1,5 @@
 <% if @contest.errors.any? %>
-<p class="alert alert-danger">There are <%= @contest.errors.count %> errors.</p>
+<div class="alert alert-danger">There are <%= @contest.errors.count %> errors.</div>
 <ul>
   <% @contest.errors.full_messages.each do |msg| %>
   <li class="text-danger"><%= msg %></li>
