@@ -23,7 +23,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 
 #Validate datetime
-gem 'validates_timeliness', '~> 3.0'
+gem 'validates_timeliness', github: 'softace/validates_timeliness', branch: 'support_for_rails4'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

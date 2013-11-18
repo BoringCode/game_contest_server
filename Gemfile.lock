@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/softace/validates_timeliness.git
+  revision: f83b4e6806cb9a94af91c2c46ad71a20ba73501c
+  branch: support_for_rails4
+  specs:
+    validates_timeliness (3.0.14)
+      timeliness (~> 0.3.7)
+
+GIT
   remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
   revision: ab2f7dd92491bd490e545c18d32e966567b84a3b
   specs:
@@ -139,8 +147,6 @@ GEM
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    validates_timeliness (3.0.14)
-      timeliness (~> 0.3.6)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -163,4 +169,4 @@ DEPENDENCIES
   timecop
   turbolinks
   uglifier (>= 1.3.0)
-  validates_timeliness (~> 3.0)
+  validates_timeliness!
