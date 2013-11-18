@@ -8,8 +8,17 @@ class Referee < ActiveRecord::Base
    validates(:rules_url, presence: true, format: /(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?/i)
    validates(:players_per_game, presence: true, :numericality => { :only_integer => true, :greater_than => 0, :less_than => 11 })
    
+   validate :validate_location
+   
+   def validate_location
+      if (!self.file_location.nil? && !File.exist?(self.file_location))
+         errors.add(:file_location, "File must exist")
+      end
+   end
+   
    def upload=(uploaded_file)
       if (uploaded_file.nil?)
+         errors.add(:file_location, "Please upload a file")
          file_location = nil
       else
          file_name_time_hash = Time.now.to_s.gsub(/\s/, '_') + SecureRandom.hex(4)
