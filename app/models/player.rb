@@ -6,9 +6,11 @@ class Player < ActiveRecord::Base
    validates :user, presence: true
    validates :contest, presence: true
    
-   validates(:name, presence: true, uniqueness: true, length: {maximum: 20})
+   validates(:name, presence: true, length: {maximum: 20})
+   validates_uniqueness_of :name, :scope => :contest_id
    validates(:description, presence: true)
    #validates(:downloadable, presence: true)
    #validates(:playable, presence: true)
+   
    include Uploadable
 end

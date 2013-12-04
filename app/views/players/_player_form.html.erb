@@ -14,3 +14,15 @@
    <%= f.label :description %>
    <%= f.text_field :description, class: "form-control" %>
 </div>
+<div class="form-group">
+   <%= f.label :downloadable %>
+   <% f.check_box :downloadable, class: "form-control" %>
+</div>
+<div class="form-group">
+   <%= f.label :playabe %>
+   <% f.check_box :playable, class: "form-control" %>
+</div>
+<div class="form-group">
+   <%= f.label :upload, "Upload file" %>
+   <%= f.file_field :upload, class: "form-control" %>
+</div>
