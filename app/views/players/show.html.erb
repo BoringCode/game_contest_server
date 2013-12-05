@@ -9,7 +9,10 @@
    <p>Record: <%= @wins %>-<%= @losses %></p>
    <ul class="list-group">
       <% @matches.each do |pm| %>
-         <li><strong>Result:</strong> <%= pm.result %></li>
+         <li>
+            <p><strong>Result:</strong> <%= pm.result %></p>
+            <p><%= link_to pm.match_id, match_path(pm.match) %></p>
+         </li>
       <% end %>
    </ul>
    <p>Player is available for matches</p>
