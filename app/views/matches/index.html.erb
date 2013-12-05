@@ -1,0 +1,9 @@
+<% content_for :title, "List of matches in contest" %>
+<header class="page-header">
+   <h2><%=h yield(:title)%></h2>
+</header>
+<ul>
+   <% @matches.each do |m| %>
+   <li><%= link_to m.id, match_path(m.manager_id) %></li>
+   <% end %>
+</ul>

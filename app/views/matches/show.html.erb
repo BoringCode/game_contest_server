@@ -1,0 +1,21 @@
+<% if @match then %>
+   <% content_for :title, "Match" %>
+   <header class="page-header">
+      <h2><%=h yield(:title)%></h2>
+   </header>
+   <p><%= link_to @match.id, match_path(@match.manager_id) %></p>
+   <p>Status: <%= @match.status %></p>
+   <p>Time until earliest start: <%= distance_of_time_in_words_to_now(@match.earliest_start) %></p>
+   <p>Time since completion: <%= distance_of_time_in_words_to_now(@match.completion) %></p>
+   <p>Manager name: <%= @match.manager.name %></p>
+   <p>Manager referee name: <%= @match.manager.referee.name %></p>
+   <p>Players per game: <%= @match.manager.referee.players_per_game %></p>
+   <ol>
+      <% @match.player_matches.order(score: :desc).each do |pm| %>
+      <li><%= link_to pm.player.name, pm.player %>: <%= pm.score %></li>
+      <% end %>
+   </ol>
+<% else %>
+   <% content_for :title, "Match not found" %>
+   <%= render 'layouts/no_reference' %>
+<% end %>
