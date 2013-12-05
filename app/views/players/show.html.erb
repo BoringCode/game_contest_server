@@ -1,0 +1,28 @@
+<% if @player then %>
+   <% content_for :title, "Player - " + @player.name %>
+   <header class="page-header">
+      <h2><%=h yield(:title)%></h2>
+   </header>
+   <p>Creator: <%= link_to @player.user.username, user_path(@player.user) %></p>
+   <p>Name: <%= @player.name %></p>
+   <p>Description: <%= @player.description %></p>
+   <p>Record: <%= @wins %>-<%= @losses %></p>
+   <ul class="list-group">
+      <% @matches.each do |pm| %>
+         <li><strong>Result:</strong> <%= pm.result %></li>
+      <% end %>
+   </ul>
+   <p>Player is available for matches</p>
+   <h2>Matches</h2>
+   <ul class="list-group">
+      <% @player.matches.each do |m| %>
+         <li class="list-group-item"><%= link_to m, match_path(m) %></li>
+      <% end %>
+   </ul>
+   <p>Contest: <%= link_to @player.contest.name, contest_path(@player.contest) %></p>
+   <% if (logged_in? && current_user?(@player.user)) %><%= link_to "Edit player", edit_player_path %><% end %>
+   <% if (logged_in? && current_user?(@player.user)) %><%= link_to "Delete player", player_path(@player), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{@player.name}?", disable_with: 'Deleting...' } %><% end %>
+<% else %>
+   <% content_for :title, "Player not found" %>
+   <%= render 'layouts/no_reference' %>
+<% end %>

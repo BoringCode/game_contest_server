@@ -2,7 +2,7 @@
 <header class="page-header">
   <h2><%=h yield(:title)%></h2>
 </header>
-<%= form_for [@player.contest, @player], :action => "create", :method => :post do |f| %>
+<%= form_for [@player.contest, @player] do |f| %>
    <%= render 'player_form', f:f %>
    <%= f.submit "Create Player", class: "btn btn-success" %>
 <% end %>

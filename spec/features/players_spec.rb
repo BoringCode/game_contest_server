@@ -248,7 +248,7 @@ describe "PlayersPages" do
 
 	visit player_path(player)
       end
-
+       
       it { should have_content('Win', count: 5) }
       it { should_not have_content('Loss') }
       it { should have_content('Record: 5-0') }

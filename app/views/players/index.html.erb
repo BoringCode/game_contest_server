@@ -1,0 +1,16 @@
+<% if (@contest) %>
+   <% content_for :title, "Players for Contest" %>
+   <header class="page-header">
+     <h2><%=h yield(:title)%></h2>
+   </header>
+   <ul class="list-group">
+      <% @contest.players.each do |p| %>
+         <li class="list-group-item">
+            <%= link_to p.name, player_path(p) %>
+      </li>
+      <% end %>
+   </ul>          
+<% else %>
+   <% content_for :title, "Player not found" %>
+   <%= render 'layouts/no_reference' %>
+<% end %>

@@ -1,0 +1,13 @@
+<% if (@player) %>
+   <% content_for :title, "Edit Player: " + @player.name %>
+   <header class="page-header">
+     <h2><%=h yield(:title)%></h2>
+   </header>
+   <%= form_for @player, :action => "update", :method => :patch do |f| %>
+      <%= render 'player_form', f:f %>
+      <%= f.submit "Update Player", class: "btn btn-success" %>
+   <% end %>
+<% else %>
+   <% content_for :title, "Player not found" %>
+   <%= render 'layouts/no_reference' %>
+<% end %>

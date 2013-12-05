@@ -1,8 +1,14 @@
 class PlayersController < ApplicationController   
    #restrict access
    before_action :ensure_user_logged_in, only: [:new, :create, :edit, :update, :destroy]
-   #before_action :ensure_contest_creator, only: [:new, :create, :edit, :update]
    before_action :ensure_correct_user, only: [:update, :edit, :destroy]
+   
+   def index
+      if (Contest.exists?(params[:contest_id]))
+         @contest = Contest.find(params[:contest_id])
+         @players = Player.all
+      end
+   end
    
    def new
       if (Contest.exists?(params[:contest_id]))
@@ -15,8 +21,9 @@ class PlayersController < ApplicationController
       if (Contest.exists?(params[:contest_id]))
          contest = Contest.find(params[:contest_id])
          @player = contest.players.build(permitted_params)
+         @player.user = current_user
          if @player.save
-            flash[:success] = "Player created!"
+            flash[:success] = "Player created"
             redirect_to @player
          else
             flash.now[:danger] = "Unable to create player"
@@ -41,6 +48,16 @@ class PlayersController < ApplicationController
    def show
       if (Player.exists?(params[:id]))
          @player = Player.find(params[:id])
+         @matches = @player.player_matches
+         @wins = 0
+         @losses = 0
+         @matches.each do |match|
+            if match.result.downcase == "win"
+               @wins += 1
+            elsif match.result.downcase == "loss"
+               @losses += 1
+            end
+         end
       end
    end
    
@@ -56,7 +73,7 @@ class PlayersController < ApplicationController
          flash[:success] = "Deleted: #{@player.name}"
          File.delete(@player.file_location)
          @player.destroy
-         redirect_to contests_path
+         redirect_to contest_players_path(@player.contest)
       end
    end
    
@@ -69,13 +86,7 @@ class PlayersController < ApplicationController
             flash[:warning] = "Unable"
             redirect_to login_path
          end
-      end 
-      def ensure_contest_creator
-         if (!current_user.contest_creator?)
-            flash[:danger] = "Unable"
-            redirect_to root_path
-         end
-      end  
+      end   
       def ensure_correct_user
          if (Player.exists?(params[:id]))
             @player = Player.find(params[:id])

@@ -9,9 +9,10 @@
    <p>Deadline: <%= distance_of_time_in_words_to_now(@contest.deadline) %></p>
    <p>Description: <%= @contest.description %></p>
    <p>Referee: <%= link_to @contest.referee.name, referee_path(@contest.referee) %></p>
+   <%= link_to "New Player", new_contest_player_path(@contest), class: "btn btn-success" %>
    <% if (logged_in? && current_user?(@contest.user)) %><%= link_to "Edit contest", edit_contest_path, class: "btn btn-success" %><% end %>
    <% if (logged_in? && current_user.admin?) %><%= link_to "Delete contest", contest_path(@contest), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure you want to delete #{@contest.name}?", disable_with: 'Deleting...' } %><% end %>
 <% else %>
-   <% content_for :title, "Referee not found" %>
+   <% content_for :title, "Contest not found" %>
    <%= render 'layouts/no_reference' %>
 <% end %>
