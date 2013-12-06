@@ -6,9 +6,9 @@
    <p>Creator: <%= link_to @player.user.username, user_path(@player.user) %></p>
    <p>Name: <%= @player.name %></p>
    <p>Description: <%= @player.description %></p>
-   <p>Record: <%= @wins %>-<%= @losses %></p>
+   <p>Record: <%= @player.player_matches.wins.count %>-<%= @player.player_matches.losses.count %></p>
    <ul class="list-group">
-      <% @matches.each do |pm| %>
+      <% @player.player_matches.each do |pm| %>
          <li>
             <p><strong>Result:</strong> <%= pm.result %></p>
             <p><%= link_to pm.match_id, match_path(pm.match) %></p>

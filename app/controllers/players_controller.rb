@@ -6,7 +6,7 @@ class PlayersController < ApplicationController
    def index
       if (Contest.exists?(params[:contest_id]))
          @contest = Contest.find(params[:contest_id])
-         @players = Player.all
+         @players = @contest.players
       end
    end
    
@@ -48,16 +48,6 @@ class PlayersController < ApplicationController
    def show
       if (Player.exists?(params[:id]))
          @player = Player.find(params[:id])
-         @matches = @player.player_matches
-         @wins = 0
-         @losses = 0
-         @matches.each do |match|
-            if match.result.downcase == "win"
-               @wins += 1
-            elsif match.result.downcase == "loss"
-               @losses += 1
-            end
-         end
       end
    end
    
